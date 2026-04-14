@@ -29,6 +29,13 @@ public class FakeUserRepository implements UserRepositoryPort {
     }
 
     @Override
+    public Optional<User> findByName(String name) {
+        return userdb.stream()
+                .filter(u -> u.getName().equals(name))
+                .findFirst();
+    }
+
+    @Override
     public Optional<User> findByEmail(String email) {
         return userdb.stream()
                 .filter(u -> u.getEmail().equals(new Email(email)))

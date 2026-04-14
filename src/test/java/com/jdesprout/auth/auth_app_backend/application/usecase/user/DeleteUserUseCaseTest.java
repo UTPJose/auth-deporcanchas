@@ -36,7 +36,7 @@ class DeleteUserUseCaseTest {
     void delete_user_successfully() {
         userRepository.add(user);
 
-        deleteUserUseCase.execute(user.getId());
+        deleteUserUseCase.execute(user.getName());
 
         Optional<User> deletedUser = userRepository.findById(user.getId());
 

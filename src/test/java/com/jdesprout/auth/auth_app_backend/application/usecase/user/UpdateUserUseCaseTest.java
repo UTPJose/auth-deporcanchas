@@ -42,7 +42,7 @@ class UpdateUserUseCaseTest {
                 .name("nuevo nombre")
                 .build();
 
-        User result = updateUserUseCase.execute(updateName, user.getId());
+        User result = updateUserUseCase.execute(updateName);
 
         assertEquals(updateName.getName(), result.getName());
     }
@@ -53,7 +53,7 @@ class UpdateUserUseCaseTest {
                 .email(new Email("nuevo@email.com"))
                 .build();
 
-        User result = updateUserUseCase.execute(updateEmail, user.getId());
+        User result = updateUserUseCase.execute(updateEmail);
 
         assertEquals(updateEmail.getEmail().value(), result.getEmail().value());
     }
@@ -72,7 +72,7 @@ class UpdateUserUseCaseTest {
         when(passwordEncoder.encode(rawPassword))
                 .thenReturn(encodedPassword);
 
-        User result = updateUserUseCase.execute(updatePassword, user.getId());
+        User result = updateUserUseCase.execute(updatePassword);
 
         assertEquals(encodedPassword, result.getPassword());
 
@@ -86,7 +86,7 @@ class UpdateUserUseCaseTest {
                 .enable(false)
                 .build();
 
-        User result = updateUserUseCase.execute(updateEnable, user.getId());
+        User result = updateUserUseCase.execute(updateEnable);
 
         assertFalse(result.isEnable());
     }
@@ -102,7 +102,7 @@ class UpdateUserUseCaseTest {
 
         User updateData = UserTestBuilder.builder().build();
 
-        User result = updateUserUseCase.execute(updateData, user.getId());
+        User result = updateUserUseCase.execute(updateData);
 
         assertEquals(originalName, result.getName());
         assertEquals(originalEmail, result.getEmail().value());
@@ -115,7 +115,16 @@ class UpdateUserUseCaseTest {
     void throw_exception_when_user_not_found() {
         assertThrows(
                 ResourceNotFoundException.class,
-                () -> updateUserUseCase.execute(user, "invalid-id")
+                () -> updateUserUseCase.execute(new User(
+                        "",
+                        new Email("test@email.com"),
+                        "noexiste",
+                        "",
+                        true,
+                        null,
+                        null,
+                        null
+                ))
         );
     }
 
