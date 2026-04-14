@@ -3,10 +3,13 @@ package com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.m
 import com.jdesprout.auth.auth_app_backend.domain.model.Role;
 import com.jdesprout.auth.auth_app_backend.domain.model.User;
 import com.jdesprout.auth.auth_app_backend.domain.model.valueobject.Email;
+import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.request.RegisterRequest;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.dtos.RoleDTO;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.dtos.UserDTO;
+import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.request.UpdateRequest;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +26,32 @@ public class UserDTOMapper {
                 dto.getCreatedAt(),
                 dto.getUpdateAt(),
                 mapRoles(dto.getRoles())
+        );
+    }
+
+    public User toDomain(UpdateRequest request) {
+        return new User(
+                null,
+                new Email(request.email()),
+                request.name(),
+                request.password(),
+                request.enabled(),
+                null,
+                null,
+                null
+        );
+    }
+
+    public User toDomain(RegisterRequest request) {
+        return new User(
+                null,
+                new Email(request.email()),
+                request.name(),
+                request.password(),
+                true,
+                Instant.now(),
+                null,
+                mapRoles(request.roles())
         );
     }
 

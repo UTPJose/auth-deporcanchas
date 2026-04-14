@@ -35,6 +35,11 @@ public class UserSecondRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
+    public Optional<User> findByName(String name) {
+        return userRepository.findByName(name).map(userPersistenceMapper::toDomain);
+    }
+
+    @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email).map(userPersistenceMapper::toDomain);
     }

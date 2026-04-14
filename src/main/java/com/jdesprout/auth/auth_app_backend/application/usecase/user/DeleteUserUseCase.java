@@ -14,8 +14,8 @@ public class DeleteUserUseCase {
         this.userRepository = userRepository;
     }
 
-    public void execute(String userId) {
-        User user = userRepository.findById(userId).orElseThrow(
+    public void execute(String name) {
+        User user = userRepository.findByName(name).orElseThrow(
                 () -> new ResourceNotFoundException("User does not exists")
         );
         userRepository.delete(user);

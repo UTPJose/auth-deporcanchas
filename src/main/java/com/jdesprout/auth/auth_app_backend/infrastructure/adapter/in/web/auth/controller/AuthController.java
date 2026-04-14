@@ -10,6 +10,7 @@ import com.jdesprout.auth.auth_app_backend.domain.model.Role;
 import com.jdesprout.auth.auth_app_backend.domain.model.User;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.request.LoginRequest;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.request.RefreshTokenRequest;
+import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.request.RegisterRequest;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.response.TokenResponse;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.response.UserResponse;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.dtos.UserDTO;
@@ -175,8 +176,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> registerUser(@RequestBody UserDTO userDTO) {
-        User user = registerUser.execute(mapper.toDomain(userDTO));
+    public ResponseEntity<UserResponse> registerUser(@RequestBody RegisterRequest request) {
+        User user = registerUser.execute(mapper.toDomain(request));
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(UserResponse.of(

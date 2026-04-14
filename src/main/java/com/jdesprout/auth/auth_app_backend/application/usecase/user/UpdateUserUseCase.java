@@ -20,10 +20,10 @@ public class UpdateUserUseCase {
         this.passwordEncoderPort = passwordEncoderPort;
     }
 
-    public User execute(User user, String userId) {
+    public User execute(User user) {
         User existingUser = userRepository
-                .findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("El usuario con esa id no existe"));
+                .findById(user.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User does not exists"));
         if(user.getName() != null) existingUser.setName(user.getName());
         if(user.getEmail() != null) existingUser.setEmail(user.getEmail());
         if(user.getPassword() != null) existingUser.setPassword(passwordEncoderPort.encode(user.getPassword()));

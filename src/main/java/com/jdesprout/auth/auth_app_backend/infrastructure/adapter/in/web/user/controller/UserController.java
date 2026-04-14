@@ -8,6 +8,7 @@ import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.dt
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.dtos.UserDTO;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.mapper.UserDTOMapper;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.mapper.UserWebMapper;
+import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.request.UpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -70,7 +71,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping(params = "role")
+    @GetMapping("/by-role")
     public ResponseEntity<PageResult<UserByRoleDTO>> getAllUsersByRoleUser(
             @RequestParam(defaultValue = "ROLE_USER") String role,
             @RequestParam(defaultValue = "0") int page,
@@ -83,7 +84,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping(params = "email")
+    @GetMapping("/by-email")
     public ResponseEntity<UserDTO> getUserByEmail(
             @RequestParam String email
     ) {
@@ -93,7 +94,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping(params = "id")
+    @GetMapping("/by-id")
     public ResponseEntity<UserDTO> getUserByUserId(
             @RequestParam String id
     ) {
@@ -103,20 +104,19 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping
+    @DeleteMapping("/by-name")
     public void deleteUser(
-            @RequestParam String id
+            @RequestParam String name
     ) {
-        deleteUser.execute(id);
+        deleteUser.execute(name);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping
     public ResponseEntity<UserDTO> updateUser(
-            @RequestBody UserDTO userDTO,
-            @RequestParam String id
+            @RequestBody UpdateRequest request
     ) {
-        User user = updateUser.execute(dtoMapper.toDomain(userDTO), id);
+        User user = updateUser.execute(dtoMapper.toDomain(request));
         return ResponseEntity
                 .ok(dtoMapper.toDTO(user));
     }
