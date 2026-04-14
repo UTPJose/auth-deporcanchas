@@ -58,16 +58,7 @@ class UpdateUserUseCaseTest {
         assertEquals(updateEmail.getEmail().value(), result.getEmail().value());
     }
 
-    @Test
-    void update_user_image() {
-        User updateImage = UserTestBuilder.builder()
-                .image("new-image.png")
-                .build();
 
-        User result = updateUserUseCase.execute(updateImage, user.getId());
-
-        assertEquals(updateImage.getImage(), result.getImage());
-    }
 
     @Test
     void encode_password_when_password_is_updated() {
@@ -104,7 +95,6 @@ class UpdateUserUseCaseTest {
     void do_not_change_fields_when_values_are_null() {
         String originalName = user.getName();
         String originalEmail = user.getEmail().value();
-        String originalImage = user.getImage();
         String originalPassword = user.getPassword();
 
         when(passwordEncoder.encode(originalPassword))
@@ -116,7 +106,6 @@ class UpdateUserUseCaseTest {
 
         assertEquals(originalName, result.getName());
         assertEquals(originalEmail, result.getEmail().value());
-        assertEquals(originalImage, result.getImage());
         assertEquals(originalPassword, result.getPassword());
 
         verify(passwordEncoder).encode(originalPassword);

@@ -33,6 +33,7 @@ public class CreateUserUseCase {
         }
 
         user.setId(UUID.randomUUID().toString());
+        user.setEnable(true);
 
         Set<Role> validatedRoles = new HashSet<>();
 

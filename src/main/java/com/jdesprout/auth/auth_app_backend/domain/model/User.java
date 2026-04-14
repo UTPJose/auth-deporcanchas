@@ -11,7 +11,6 @@ public class User {
     private Email email;
     private String name;
     private String password;
-    private String image;
     private boolean enable;
     private Instant createdAt;
     private Instant updateAt;
@@ -22,7 +21,6 @@ public class User {
             Email email,
             String name,
             String password,
-            String image,
             boolean enable,
             Instant createdAt,
             Instant updateAt,
@@ -32,7 +30,6 @@ public class User {
         this.email = email;
         this.name = name;
         this.password = password;
-        this.image = image;
         this.enable = enable;
         this.createdAt = createdAt;
         this.updateAt = updateAt;
@@ -69,14 +66,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public boolean isEnable() {

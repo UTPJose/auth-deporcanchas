@@ -13,7 +13,6 @@ public class UserTestBuilder {
     private Email email = new Email("user@test.com");
     private String name = "User";
     private String password = "123456";
-    private String image = null;
     private boolean enable = true;
     private Instant createdAt = Instant.now();
     private Instant updateAt = Instant.now();
@@ -40,11 +39,6 @@ public class UserTestBuilder {
         return this;
     }
 
-    public UserTestBuilder image(String image) {
-        this.image = image;
-        return this;
-    }
-
     public UserTestBuilder enable(boolean enable) {
         this.enable = enable;
         return this;
@@ -56,6 +50,6 @@ public class UserTestBuilder {
     }
 
     public User build() {
-        return new User(id, email, name, password, image, enable, createdAt, updateAt, roles);
+        return new User(id, email, name, password, enable, createdAt, updateAt, roles);
     }
 }

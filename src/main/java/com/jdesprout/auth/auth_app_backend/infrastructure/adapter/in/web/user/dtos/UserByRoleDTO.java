@@ -14,7 +14,6 @@ public class UserByRoleDTO {
     private String id;
     private String name;
     private String email;
-    private String image;
     private Instant createdAt = Instant.now();
     private Instant updateAt = Instant.now();
 

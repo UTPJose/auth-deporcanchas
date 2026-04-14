@@ -26,7 +26,6 @@ public class UpdateUserUseCase {
                 .orElseThrow(() -> new ResourceNotFoundException("El usuario con esa id no existe"));
         if(user.getName() != null) existingUser.setName(user.getName());
         if(user.getEmail() != null) existingUser.setEmail(user.getEmail());
-        if(user.getImage() != null) existingUser.setImage(user.getImage());
         if(user.getPassword() != null) existingUser.setPassword(passwordEncoderPort.encode(user.getPassword()));
         existingUser.setEnable(user.isEnable());
         existingUser.setUpdateAt(Instant.now());

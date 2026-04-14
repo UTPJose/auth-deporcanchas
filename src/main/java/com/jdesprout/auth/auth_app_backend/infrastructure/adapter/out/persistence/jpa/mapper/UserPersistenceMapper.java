@@ -19,7 +19,6 @@ public class UserPersistenceMapper {
                 new Email(jpaEntity.getEmail()),
                 jpaEntity.getName(),
                 jpaEntity.getPassword(),
-                jpaEntity.getImage(),
                 jpaEntity.isEnable(),
                 jpaEntity.getCreatedAt(),
                 jpaEntity.getUpdateAt(),
@@ -51,7 +50,6 @@ public class UserPersistenceMapper {
                 .email(domain.getEmail().value())
                 .name(domain.getName())
                 .password(domain.getPassword())
-                .image(domain.getImage())
                 .enable(domain.isEnable())
                 .createdAt(domain.getCreatedAt())
                 .updateAt(domain.getUpdateAt())

@@ -23,7 +23,6 @@ public class UserJpaEntity {
     @Column(name = "user_name", length = 500)
     private String name;
     private String password;
-    private String image;
     @Builder.Default
     private boolean enable = true;
     @Builder.Default
