@@ -4,6 +4,7 @@ import com.jdesprout.auth.auth_app_backend.domain.model.Role;
 import com.jdesprout.auth.auth_app_backend.domain.model.User;
 import com.jdesprout.auth.auth_app_backend.domain.model.valueobject.Email;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.request.RegisterRequest;
+import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.request.RoleRequest;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.dtos.RoleDTO;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.dtos.UserDTO;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.request.UpdateRequest;
@@ -51,13 +52,19 @@ public class UserDTOMapper {
                 true,
                 Instant.now(),
                 null,
-                mapRoles(request.roles())
+                mapRequestRoles(request.roles())
         );
     }
 
     private Set<Role> mapRoles(Set<RoleDTO> roles) {
         return roles.stream()
                 .map(role -> new Role(role.getId(), role.getName()))
+                .collect(Collectors.toSet());
+    }
+
+    private Set<Role> mapRequestRoles(Set<RoleRequest> roles) {
+        return roles.stream()
+                .map(role -> new Role(null, role.roleName()))
                 .collect(Collectors.toSet());
     }
 
