@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,9 +45,8 @@ class CreateUserUseCaseTest {
         assertAll(
                 () -> assertNotNull(result.getId()),
                 () -> assertTrue(savedUser.isPresent()),
-                () -> assertTrue(result.getRoles().stream().anyMatch(
-                        r -> r.getName().equals("ROLE_ADMIN")
-                ))
+                () -> assertNotNull(result.getRole()),
+                () -> assertEquals(result.getRole().getNombre(), "ROLE_ADMIN")
         );
     }
 
@@ -62,7 +60,7 @@ class CreateUserUseCaseTest {
 
     @Test
     void throw_exception_when_user_has_no_roles() {
-        user.setRoles(null);
+        user.setRole(null);
 
         assertThrows(IllegalArgumentException.class,
                 () -> createUserUseCase.execute(user));
@@ -70,7 +68,7 @@ class CreateUserUseCaseTest {
 
     @Test
     void throw_exception_when_user_role_is_not_allowed() {
-        user.setRoles(Set.of(new Role("3", "ROLE_NONEXISTENT")));
+        user.setRole(new Role(3L, "ROLE_NONEXISTENT"));
 
         assertThrows(IllegalArgumentException.class,
                 () -> createUserUseCase.execute(user));

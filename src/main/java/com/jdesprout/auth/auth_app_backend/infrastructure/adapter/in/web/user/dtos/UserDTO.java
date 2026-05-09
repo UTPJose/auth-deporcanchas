@@ -13,13 +13,14 @@ import java.util.Set;
 @Builder
 public class UserDTO {
 
-    private String id;
+    private Long id;
     private String email;
     private String name;
     private String password;
+    private String phoneNumber;
     private boolean enable = true;
     private Instant createdAt = Instant.now();
     private Instant updateAt = Instant.now();
-    private Set<RoleDTO> roles = new HashSet<>();
+    private RoleDTO role = new RoleDTO();
 
 }

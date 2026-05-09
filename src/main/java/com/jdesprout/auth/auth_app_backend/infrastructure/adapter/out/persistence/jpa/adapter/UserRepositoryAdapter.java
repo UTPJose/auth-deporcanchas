@@ -23,7 +23,7 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     private final UserPersistenceMapper userPersistenceMapper;
 
     @Override
-    public Optional<User> findById(String id) {
+    public Optional<User> findById(Long id) {
         System.out.println("Primary repository");
         return userRepository.findById(id).map(userPersistenceMapper::toDomain);
     }

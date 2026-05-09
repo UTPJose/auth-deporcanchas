@@ -12,21 +12,25 @@ import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 public class UserDTOMapper {
 
     public User toDomain(UserDTO dto) {
+        Role role = dto.getRole() != null
+                ? new Role(dto.getRole().getId(), dto.getRole().getNombre())
+                : null;
+
         return new User(
                 dto.getId(),
                 new Email(dto.getEmail()),
                 dto.getName(),
                 dto.getPassword(),
+                dto.getPhoneNumber(),
                 dto.isEnable(),
                 dto.getCreatedAt(),
                 dto.getUpdateAt(),
-                mapRoles(dto.getRoles())
+                role
         );
     }
 
@@ -36,6 +40,7 @@ public class UserDTOMapper {
                 new Email(request.email()),
                 request.name(),
                 request.password(),
+                request.phoneNumber(),
                 request.enabled(),
                 null,
                 null,
@@ -44,52 +49,45 @@ public class UserDTOMapper {
     }
 
     public User toDomain(RegisterRequest request) {
+        Role role = null;
+        if (request.roles() != null && !request.roles().isEmpty()) {
+            RoleRequest roleRequest = request.roles().stream().findFirst().orElse(null);
+            if (roleRequest != null) {
+                role = new Role(null, roleRequest.roleName());
+            }
+        }
+
         return new User(
                 null,
                 new Email(request.email()),
                 request.name(),
                 request.password(),
+                request.phoneNumber(),
                 true,
                 Instant.now(),
                 null,
-                mapRequestRoles(request.roles())
+                role
         );
     }
 
-    private Set<Role> mapRoles(Set<RoleDTO> roles) {
-        return roles.stream()
-                .map(role -> new Role(role.getId(), role.getName()))
-                .collect(Collectors.toSet());
-    }
-
-    private Set<Role> mapRequestRoles(Set<RoleRequest> roles) {
-        return roles.stream()
-                .map(role -> new Role(null, role.roleName()))
-                .collect(Collectors.toSet());
-    }
-
     public UserDTO toDTO(User domain) {
-
-        Set<RoleDTO> roleEntities = domain.getRoles() == null
-                ? Set.of()
-                : domain.getRoles().stream()
-                .map(role -> {
-                    RoleDTO dto = new RoleDTO();
-                    dto.setId(role.getId());
-                    dto.setName(role.getName());
-                    return dto;
-                })
-                .collect(Collectors.toSet());
+        RoleDTO roleDTO = null;
+        if (domain.getRole() != null) {
+            roleDTO = new RoleDTO();
+            roleDTO.setId(domain.getRole().getId());
+            roleDTO.setNombre(domain.getRole().getNombre());
+        }
 
         return new UserDTO(
                 domain.getId(),
                 domain.getEmail().value(),
                 domain.getName(),
                 domain.getPassword(),
+                domain.getPhoneNumber(),
                 domain.isEnable(),
                 domain.getCreatedAt(),
                 domain.getUpdateAt(),
-                roleEntities
+                domain.getRole() != null ? roleDTO : null
         );
     }
 

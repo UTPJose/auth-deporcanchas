@@ -27,6 +27,7 @@ public class UpdateUserUseCase {
         if(user.getName() != null) existingUser.setName(user.getName());
         if(user.getEmail() != null) existingUser.setEmail(user.getEmail());
         if(user.getPassword() != null) existingUser.setPassword(passwordEncoderPort.encode(user.getPassword()));
+        if(user.getPhoneNumber() != null) existingUser.setPhoneNumber(user.getPhoneNumber());
         existingUser.setEnable(user.isEnable());
         existingUser.setUpdateAt(Instant.now());
         return userRepository.save(existingUser);

@@ -10,14 +10,14 @@ public class RolePersistenceMapper {
     public Role toDomain(RoleJpaEntity jpaEntity) {
         return new Role(
                 jpaEntity.getId(),
-                jpaEntity.getName()
+                jpaEntity.getNombre()
         );
     }
 
     public RoleJpaEntity toEntity(Role domain) {
         return RoleJpaEntity.builder()
                 .id(domain.getId())
-                .name(domain.getName())
+                .nombre(domain.getNombre())
                 .build();
     }
 

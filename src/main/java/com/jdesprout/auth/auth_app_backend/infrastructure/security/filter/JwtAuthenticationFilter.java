@@ -45,13 +45,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 Jws<Claims> parse = jwtService.parse(token);
                 Claims payload = parse.getPayload();
-                String userId = payload.getSubject();
+                String userIdStr = payload.getSubject();
+                Long userId = Long.parseLong(userIdStr);
 
                 userRepository.findById(userId)
                         .ifPresent(user -> {
                             if(user.isEnable()) {
-                                List<GrantedAuthority> authorities = user.getRoles() == null ? List.of() : user.getRoles()
-                                        .stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+                                List<GrantedAuthority> authorities = user.getRole() == null
+                                        ? List.of()
+                                        : List.of(new SimpleGrantedAuthority(user.getRole().getNombre()));
 
                                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                                         user.getEmail(),

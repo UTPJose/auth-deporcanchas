@@ -16,13 +16,9 @@ public class SecurityUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities =
-                user.getRoles()
-                        .stream()
-                        .map(role -> new SimpleGrantedAuthority(role.getName()))
-                        .toList();
-
-        return authorities;
+        return user.getRole() == null
+                ? List.of()
+                : List.of(new SimpleGrantedAuthority(user.getRole().getNombre()));
     }
 
     @Override
@@ -35,27 +31,13 @@ public class SecurityUserDetails implements UserDetails {
         return user.getEmail().value();
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
 
     @Override
     public boolean isEnabled() {
         return user.isEnable();
     }
 
-    public String getUserId(){
+    public Long getUserId(){
         return user.getId();
     }
 

@@ -5,10 +5,6 @@ import com.jdesprout.auth.auth_app_backend.domain.port.user.UserRepositoryPort;
 import com.jdesprout.auth.auth_app_backend.domain.model.Role;
 import com.jdesprout.auth.auth_app_backend.domain.model.User;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 public class CreateUserUseCase {
 
     private final UserRepositoryPort userRepository;
@@ -28,31 +24,25 @@ public class CreateUserUseCase {
             throw new IllegalArgumentException("Ese correo ya existe, intenta con otro");
         }
 
-        if (user.getRoles() == null || user.getRoles().isEmpty()) {
-            throw new IllegalArgumentException("Debe asignarse al menos un rol (ADMIN o USER)");
+        if (user.getRole() == null) {
+            throw new IllegalArgumentException("Debe asignarse un rol (ADMIN o USER)");
         }
 
-        user.setId(UUID.randomUUID().toString());
         user.setEnable(true);
-
-        Set<Role> validatedRoles = new HashSet<>();
 
         String allowedRoles = roleRepository.findAll()
                 .stream()
-                .map(Role::getName)
+                .map(Role::getNombre)
                 .toList()
                 .toString();
 
-        for (Role role : user.getRoles()) {
-            String roleName = role.getName().trim();
-            Role _role = roleRepository.findByName(roleName)
-                    .orElseThrow(() -> new IllegalArgumentException(
-                            "Rol no permitido: '" + roleName + "'. Roles permitidos: " + allowedRoles
-                    ));
-            validatedRoles.add(_role);
-        }
+        String roleName = user.getRole().getNombre().trim();
+        Role validatedRole = roleRepository.findByNombre(roleName)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Rol no permitido: '" + roleName + "'. Roles permitidos: " + allowedRoles
+                ));
 
-        user.setRoles(validatedRoles);
+        user.setRole(validatedRole);
 
         return userRepository.save(user);
     }

@@ -1,6 +1,7 @@
 package com.jdesprout.auth.auth_app_backend.application.usecase.user;
 
 import com.jdesprout.auth.auth_app_backend.application.exception.ResourceNotFoundException;
+import com.jdesprout.auth.auth_app_backend.domain.model.Role;
 import com.jdesprout.auth.auth_app_backend.domain.model.User;
 import com.jdesprout.auth.auth_app_backend.domain.model.fakerepository.FakeUserRepository;
 import com.jdesprout.auth.auth_app_backend.domain.model.usertestbuilder.UserTestBuilder;
@@ -8,6 +9,9 @@ import com.jdesprout.auth.auth_app_backend.domain.model.valueobject.Email;
 import com.jdesprout.auth.auth_app_backend.domain.port.security.PasswordEncoderPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -116,14 +120,15 @@ class UpdateUserUseCaseTest {
         assertThrows(
                 ResourceNotFoundException.class,
                 () -> updateUserUseCase.execute(new User(
-                        "",
+                        null,
                         new Email("test@email.com"),
                         "noexiste",
                         "",
+                        "921953921",
                         true,
                         null,
                         null,
-                        null
+                        new Role(1L, "ROLE_ADMIN")
                 ))
         );
     }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoleRepositoryPort {
-    Optional<Role> findByName(String rolName);
+    Optional<Role> findByNombre(String rolName);
     List<Role> findAll();
     Role save(Role role);
     boolean existsByName(String rolName);

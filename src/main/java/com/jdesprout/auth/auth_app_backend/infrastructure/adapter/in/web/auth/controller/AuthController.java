@@ -13,7 +13,6 @@ import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.me
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.request.RegisterRequest;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.response.TokenResponse;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.auth.messages.response.UserResponse;
-import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.dtos.UserDTO;
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.in.web.user.mapper.UserDTOMapper;
 import com.jdesprout.auth.auth_app_backend.infrastructure.security.cookie.CookieService;
 import com.jdesprout.auth.auth_app_backend.infrastructure.security.jwt.JwtService;
@@ -75,10 +74,7 @@ public class AuthController {
                         result.user().getName(),
                         result.user().getPassword(),
                         result.user().isEnable(),
-                        result.user().getRoles().stream()
-                                .map(Role::getName)
-                                .findFirst()
-                                .orElseThrow(null)
+                        result.user().getRole() != null ? result.user().getRole().getNombre() : "ROLE_USER"
                 )
         );
 
@@ -116,10 +112,7 @@ public class AuthController {
                                 result.user().getName(),
                                 result.user().getPassword(),
                                 result.user().isEnable(),
-                                result.user().getRoles().stream()
-                                        .map(Role::getName)
-                                        .findFirst()
-                                        .orElseThrow(null)
+                                result.user().getRole() != null ? result.user().getRole().getNombre() : "ROLE_USER"
                         )
                 )
         );
@@ -185,10 +178,7 @@ public class AuthController {
                         user.getName(),
                         user.getPassword(),
                         user.isEnable(),
-                        user.getRoles().stream()
-                                .map(Role::getName)
-                                .findFirst()
-                                .orElseThrow(null)
+                        user.getRole() != null ? user.getRole().getNombre() : "ROLE_USER"
                 ));
     }
 

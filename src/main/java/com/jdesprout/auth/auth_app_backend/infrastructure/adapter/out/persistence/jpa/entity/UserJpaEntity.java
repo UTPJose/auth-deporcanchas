@@ -13,29 +13,33 @@ import java.util.*;
 @Builder
 
 @Entity
-@Table(name = "users")
+@Table(name = "usuarios")
 public class UserJpaEntity {
     @Id
-    @Column(name = "user_id")
-    private String id;
-    @Column(name = "user_email", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "email", unique = true)
     private String email;
-    @Column(name = "user_name", length = 500)
+    @Column(name = "nombre", length = 500)
     private String name;
+    @Column(name = "clave")
     private String password;
+    @Column(name = "celular", unique = true)
+    private String phoneNumber;
     @Builder.Default
+    @Column(name = "estaActivo")
     private boolean enable = true;
     @Builder.Default
+    @Column(name = "creado_en")
     private Instant createdAt = Instant.now();
     @Builder.Default
+    @Column(name = "actualizado_en")
     private Instant updateAt = Instant.now();
-    @Enumerated(EnumType.STRING)
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<RoleJpaEntity> roles = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "roles_id", nullable = false)
+    private RoleJpaEntity role;
 
     @PrePersist
     protected void onCreate(){

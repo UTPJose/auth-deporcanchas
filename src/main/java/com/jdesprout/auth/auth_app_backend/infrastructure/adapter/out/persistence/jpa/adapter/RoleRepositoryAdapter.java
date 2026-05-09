@@ -19,8 +19,8 @@ public class RoleRepositoryAdapter implements RoleRepositoryPort {
     private final RolePersistenceMapper mapper;
 
     @Override
-    public Optional<Role> findByName(String rolName) {
-        return roleRepository.findByName(rolName);
+    public Optional<Role> findByNombre(String rolName) {
+        return roleRepository.findByNombre(rolName).map(mapper::toDomain);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class RoleRepositoryAdapter implements RoleRepositoryPort {
 
     @Override
     public boolean existsByName(String rolName) {
-        return roleRepository.existsByName(rolName);
+        return roleRepository.existsByNombre(rolName);
     }
 }

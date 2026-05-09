@@ -6,12 +6,13 @@ spring:
     name: auth-app-backend
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: validate
+    show-sql: false
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${DB_URL:jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres}
+    username: ${DB_USERNAME:postgres.edefwjkwgjwxepdducjo}
+    password: ${DB_PASSWORD:kOmPHyiwYvzR9aOB}
+    driver-class-name: org.postgresql.Driver
 
 logging:
   level:

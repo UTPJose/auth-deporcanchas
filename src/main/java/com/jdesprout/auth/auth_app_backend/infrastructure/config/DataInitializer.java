@@ -13,11 +13,11 @@ public class DataInitializer {
     CommandLineRunner initRoles(RoleRepositoryPort roleRepository) {
         return args -> {
             if (!roleRepository.existsByName("ROLE_ADMIN")) {
-                roleRepository.save(new Role("1", "ROLE_ADMIN"));
+                roleRepository.save(new Role(null, "ROLE_ADMIN"));
             }
 
             if (!roleRepository.existsByName("ROLE_USER")) {
-                roleRepository.save(new Role("2", "ROLE_USER"));
+                roleRepository.save(new Role(null, "ROLE_USER"));
             }
         };
     }

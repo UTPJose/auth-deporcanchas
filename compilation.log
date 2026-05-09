@@ -1,0 +1,38 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.jdesprout.auth:auth-app-backend >-----------------
+[INFO] Building auth-app-backend 0.0.1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ auth-app-backend ---
+[INFO] Deleting /home/josedmg/Documentos/ijprojects/auth-deporcanchas/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ auth-app-backend ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ auth-app-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 68 source files with javac [debug parameters release 25] to target/classes
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by lombok.permit.Permit
+WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[WARNING] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/adapter/in/web/user/dtos/UserByRoleDTO.java:[17,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/adapter/in/web/user/dtos/UserByRoleDTO.java:[18,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/adapter/out/persistence/jpa/entity/UserJpaEntity.java:[44,32] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/adapter/in/web/user/dtos/AllUsersDTO.java:[17,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/adapter/in/web/user/dtos/AllUsersDTO.java:[18,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/adapter/in/web/user/dtos/UserDTO.java:[21,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/adapter/in/web/user/dtos/UserDTO.java:[22,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/adapter/in/web/user/dtos/UserDTO.java:[23,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/adapter/in/web/user/dtos/UserDTO.java:[24,26] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[INFO] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/security/jwt/JwtService.java: /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/security/jwt/JwtService.java uses or overrides a deprecated API.
+[INFO] /home/josedmg/Documentos/ijprojects/auth-deporcanchas/src/main/java/com/jdesprout/auth/auth_app_backend/infrastructure/security/jwt/JwtService.java: Recompile with -Xlint:deprecation for details.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.058 s
+[INFO] Finished at: 2026-05-07T21:41:20-05:00
+[INFO] ------------------------------------------------------------------------

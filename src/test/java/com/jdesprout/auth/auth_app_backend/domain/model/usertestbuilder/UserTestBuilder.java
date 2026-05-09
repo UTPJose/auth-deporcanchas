@@ -9,16 +9,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserTestBuilder {
-    private String id = "user-id";
+    private Long id = 1L;
     private Email email = new Email("user@test.com");
     private String name = "User";
     private String password = "123456";
+    private String phoneNumber = "1234567890";
     private boolean enable = true;
     private Instant createdAt = Instant.now();
     private Instant updateAt = Instant.now();
-    private Set<Role> roles = new HashSet<>(Set.of(
-            new Role("1", "ROLE_ADMIN")
-    ));
+    private Role role = new Role(1L, "ROLE_ADMIN");
 
     public static UserTestBuilder builder() {
         return new UserTestBuilder();
@@ -45,11 +44,11 @@ public class UserTestBuilder {
     }
 
     public UserTestBuilder withUserRole() {
-        this.roles = Set.of(new Role( "2", "ROLE_USER"));
+        this.role = new Role(2L, "ROLE_USER");
         return this;
     }
 
     public User build() {
-        return new User(id, email, name, password, enable, createdAt, updateAt, roles);
+        return new User(id, email, name, password, phoneNumber, enable, createdAt, updateAt, role);
     }
 }

@@ -7,53 +7,45 @@ import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.out.persistenc
 import com.jdesprout.auth.auth_app_backend.infrastructure.adapter.out.persistence.jpa.entity.UserJpaEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 @Component
 public class UserPersistenceMapper {
 
     public User toDomain(UserJpaEntity jpaEntity) {
+        Role role = jpaEntity.getRole() != null
+                ? new Role(jpaEntity.getRole().getId(), jpaEntity.getRole().getNombre())
+                : null;
+
         return new User(
                 jpaEntity.getId(),
                 new Email(jpaEntity.getEmail()),
                 jpaEntity.getName(),
                 jpaEntity.getPassword(),
+                jpaEntity.getPhoneNumber(),
                 jpaEntity.isEnable(),
                 jpaEntity.getCreatedAt(),
                 jpaEntity.getUpdateAt(),
-                mapRoles(jpaEntity.getRoles())
+                role
         );
     }
 
-    private Set<Role> mapRoles(Set<RoleJpaEntity> roles) {
-        return roles.stream()
-                .map(role -> new Role(role.getId(), role.getName()))
-                .collect(Collectors.toSet());
-    }
-
     public UserJpaEntity toEntity(User domain) {
-
-        Set<RoleJpaEntity> roleEntities = domain.getRoles() == null
-                ? Set.of()
-                : domain.getRoles().stream()
-                .map(role -> {
-                    RoleJpaEntity entity = new RoleJpaEntity();
-                    entity.setId(role.getId());
-                    entity.setName(role.getName());
-                    return entity;
-                })
-                .collect(Collectors.toSet());
+        RoleJpaEntity roleEntity = null;
+        if (domain.getRole() != null) {
+            roleEntity = new RoleJpaEntity();
+            roleEntity.setId(domain.getRole().getId());
+            roleEntity.setNombre(domain.getRole().getNombre());
+        }
 
         return UserJpaEntity.builder()
                 .id(domain.getId())
                 .email(domain.getEmail().value())
                 .name(domain.getName())
                 .password(domain.getPassword())
+                .phoneNumber(domain.getPhoneNumber())
                 .enable(domain.isEnable())
                 .createdAt(domain.getCreatedAt())
                 .updateAt(domain.getUpdateAt())
-                .roles(roleEntities)
+                .role(roleEntity)
                 .build();
     }
 }

@@ -7,6 +7,6 @@ public interface TokenGeneratorPort {
     String generateRefreshToken(User user);
     boolean isAccessToken(String token);
     boolean isRefreshToken(String token);
-    String getUserId(String token);
+    Long getUserId(String token);
     long getAccessTtlSeconds();
 }

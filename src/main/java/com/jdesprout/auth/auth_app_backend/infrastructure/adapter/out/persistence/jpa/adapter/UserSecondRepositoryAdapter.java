@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component("SecondRepository")
@@ -29,7 +28,7 @@ public class UserSecondRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public Optional<User> findById(String id) {
+    public Optional<User> findById(Long id) {
         System.out.println("second repository");
         return userRepository.findById(id).map(userPersistenceMapper::toDomain);
     }

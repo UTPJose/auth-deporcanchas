@@ -11,15 +11,15 @@ public class FakeRoleRepository implements RoleRepositoryPort {
 
     List<Role> roledb = new ArrayList<>(
             List.of(
-                    new Role("1", "ROLE_ADMIN"),
-                    new Role("2", "ROLE_USER")
+                    new Role(1L, "ROLE_ADMIN"),
+                    new Role(2L, "ROLE_USER")
             )
     );
 
     @Override
-    public Optional<Role> findByName(String rolName) {
+    public Optional<Role> findByNombre(String rolName) {
         return roledb.stream()
-                .filter(r -> r.getName().equals(rolName))
+                .filter(r -> r.getNombre().equals(rolName))
                 .findFirst();
     }
 
@@ -37,6 +37,6 @@ public class FakeRoleRepository implements RoleRepositoryPort {
     @Override
     public boolean existsByName(String rolName) {
         return roledb.stream()
-                .anyMatch(r -> r.getName().equals(rolName));
+                .anyMatch(r -> r.getNombre().equals(rolName));
     }
 }

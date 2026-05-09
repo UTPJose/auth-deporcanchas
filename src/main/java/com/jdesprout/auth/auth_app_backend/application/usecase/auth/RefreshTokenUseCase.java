@@ -26,7 +26,7 @@ public class RefreshTokenUseCase {
             throw new BadCredentialsException("Invalid Refresh Token Type");
         }
 
-        String userId = tokenGeneratorPort.getUserId(refreshToken);
+        Long userId = tokenGeneratorPort.getUserId(refreshToken);
 
         User user = userRepositoryPort.findById(userId).orElseThrow(
                 UserNotFoundException::new

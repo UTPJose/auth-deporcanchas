@@ -16,7 +16,6 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 @Getter
@@ -47,15 +46,14 @@ public class JwtService implements TokenGeneratorPort {
     @Override
     public String generateAccessToken(User user) {
         Instant now = Instant.now();
-        List<String> roles = user.getRoles() == null ? List.of() :
-                user.getRoles().stream().map(Role::getName).toList();
+        List<String> roles = user.getRole() == null ? List.of() : List.of(user.getRole().getNombre());
         return Jwts.builder()
-                .subject(user.getId())
+                .subject(user.getId().toString())
                 .issuer(issuer)
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(now.plusSeconds(accessTtlSeconds)))
                 .claims(Map.of(
-                        "email", user.getEmail(),
+                        "email", user.getEmail().value(),
                         "roles", roles,
                         "typ", "access"
                 ))
@@ -99,7 +97,7 @@ public class JwtService implements TokenGeneratorPort {
     }
 
     @Override
-    public String getUserId(String token) {
-        return getClaims(token).getSubject();
+    public Long getUserId(String token) {
+        return Long.parseLong(getClaims(token).getSubject());
     }
 }

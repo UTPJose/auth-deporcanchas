@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
-public interface UserJpaRepository extends JpaRepository<UserJpaEntity, String> {
-    
+public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long> {
+
     Optional<UserJpaEntity> findByEmail(String email);
     Optional<UserJpaEntity> findByName(String name);
     boolean existsByEmail(String email);
@@ -18,8 +18,7 @@ public interface UserJpaRepository extends JpaRepository<UserJpaEntity, String> 
     @Query("""
         SELECT u
         FROM UserJpaEntity u
-        JOIN u.roles r
-        WHERE r.name = :roleName
+        WHERE u.role.nombre = :roleName
     """)
     Page<UserJpaEntity> findByRole(@Param("roleName") String role, Pageable pageable);
 }

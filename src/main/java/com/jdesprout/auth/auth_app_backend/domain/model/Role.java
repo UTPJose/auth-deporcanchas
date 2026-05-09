@@ -1,27 +1,27 @@
 package com.jdesprout.auth.auth_app_backend.domain.model;
 
 public class Role {
-    private String id;
-    private String name;
+    private Long id;
+    private String nombre;
 
-    public Role(String id, String name) {
+    public Role(Long id, String nombre) {
         this.id = id;
-        this.name = name;
+        this.nombre = nombre;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

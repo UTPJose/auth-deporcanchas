@@ -4,6 +4,7 @@ public record UpdateRequest(
         String email,
         String name,
         String password,
+        String phoneNumber,
         boolean enabled
 ) {
 }

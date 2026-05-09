@@ -22,7 +22,7 @@ public class FakeUserRepository implements UserRepositoryPort {
     }
 
     @Override
-    public Optional<User> findById(String id) {
+    public Optional<User> findById(Long id) {
         return userdb.stream()
                 .filter(u -> u.getId().equals(id))
                 .findFirst();
@@ -77,9 +77,7 @@ public class FakeUserRepository implements UserRepositoryPort {
     public PageResult<User> findByRole(String role, int page, int size) {
         List<User> filtered =
                 userdb.stream()
-                        .filter(u -> u.getRoles()
-                                .stream()
-                                .anyMatch(r -> r.getName().equals(role)))
+                        .filter(u -> u.getRole() != null && u.getRole().getNombre().equals(role))
                         .toList();
 
         int totalElements = filtered.size();

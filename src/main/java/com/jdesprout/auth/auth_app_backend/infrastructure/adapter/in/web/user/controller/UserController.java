@@ -96,7 +96,7 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/by-id")
     public ResponseEntity<UserDTO> getUserByUserId(
-            @RequestParam String id
+            @RequestParam Long id
     ) {
         User user = getUserById.execute(id);
         return ResponseEntity

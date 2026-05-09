@@ -48,7 +48,7 @@ class DeleteUserUseCaseTest {
         userRepository.findById(user.getId());
 
         assertThrows(ResourceNotFoundException.class,
-                () -> deleteUserUseCase.execute(user.getId()));
+                () -> deleteUserUseCase.execute(user.getName()));
     }
 
 }

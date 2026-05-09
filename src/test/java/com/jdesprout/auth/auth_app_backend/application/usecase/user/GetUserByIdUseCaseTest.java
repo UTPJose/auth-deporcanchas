@@ -33,7 +33,7 @@ class GetUserByIdUseCaseTest {
 
         userRepository.add(user);
 
-        String userId = "user-id";
+        Long userId = 1L;
 
         User result = getUserByIdUseCase.execute(userId);
 
@@ -43,7 +43,7 @@ class GetUserByIdUseCaseTest {
 
     @Test
     void throw_exception_when_the_user_id_does_not_exist_in_repository() {
-        String userId = "user_id";
+        Long userId = 999L;
 
         assertThrows(ResourceNotFoundException.class,
                 () -> getUserByIdUseCase.execute(userId));
