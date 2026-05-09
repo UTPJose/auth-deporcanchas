@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jdesprout.auth</groupId>
-	<artifactId>auth-app-backend</artifactId>
+	<artifactId>auth-deporcanchas</artifactId>
 	<version>0.0.1</version>
-	<name>auth-app-backend</name>
-	<description>Authentication app with Spring Boot</description>
+	<name>auth-deporcanchas</name>
+	<description>Authentication app with Spring Boot for Deporcanchas</description>
 	<url/>
 	<licenses>
 		<license/>

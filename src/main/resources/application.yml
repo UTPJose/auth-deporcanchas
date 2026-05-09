@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: auth-app-backend
+    name: auth-deporcanchas
   jpa:
     hibernate:
       ddl-auto: validate
