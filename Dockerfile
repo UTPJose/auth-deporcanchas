@@ -1,5 +1,12 @@
 FROM eclipse-temurin:25-jdk
-ARG JAR_FILE=target/auth-deporcanchas-0.0.1.jar
-COPY ${JAR_FILE} auth-deporcanchas.jar
+
+WORKDIR /app
+
+COPY . .
+
+RUN chmod +x mvnw
+RUN ./mvnw clean package -DskipTests
+
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "auth-deporcanchas.jar"]
+
+ENTRYPOINT ["java", "-jar", "target/auth-deporcanchas-0.0.1.jar"]
