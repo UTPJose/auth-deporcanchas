@@ -52,9 +52,7 @@ public class UserDTOMapper {
         Role role = null;
         if (request.roles() != null && !request.roles().isEmpty()) {
             RoleRequest roleRequest = request.roles().stream().findFirst().orElse(null);
-            if (roleRequest != null) {
-                role = new Role(null, roleRequest.roleName());
-            }
+            role = new Role(null, roleRequest.roleName());
         }
 
         return new User(
