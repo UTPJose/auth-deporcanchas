@@ -2,7 +2,10 @@ FROM eclipse-temurin:25-jdk
 
 WORKDIR /app
 
-COPY target/auth-deporcanchas-0.0.1.jar target/auth-deporcanchas-0.0.1.jar
+COPY . .
+
+RUN chmod +x mvnw
+RUN ./mvnw clean package -DskipTests
 
 EXPOSE 8080
 
