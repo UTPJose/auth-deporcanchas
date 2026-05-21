@@ -46,7 +46,7 @@ public class JwtService implements TokenGeneratorPort {
     @Override
     public String generateAccessToken(User user) {
         Instant now = Instant.now();
-        List<String> roles = user.getRole() == null ? List.of() : List.of(user.getRole().getNombre());
+            List<String> roles = user.getRole() == null ? List.of() : List.of(user.getRole().getNombre());
         return Jwts.builder()
                 .subject(user.getId().toString())
                 .issuer(issuer)

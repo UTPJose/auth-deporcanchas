@@ -19,7 +19,7 @@ public class AuthUseCaseConfig {
     public LoginUseCase loginUseCase(
             AuthenticationPort authenticationPort,
             TokenGeneratorPort tokenGeneratorPort,
-            @Qualifier("SecondRepository") UserRepositoryPort userRepositoryPort
+            UserRepositoryPort userRepositoryPort
     ) {
         return new LoginUseCase(
                 authenticationPort,
@@ -31,7 +31,7 @@ public class AuthUseCaseConfig {
     @Bean
     public RefreshTokenUseCase refreshTokenUseCase(
             TokenGeneratorPort tokenGeneratorPort,
-            @Qualifier("SecondRepository") UserRepositoryPort userRepositoryPort
+            UserRepositoryPort userRepositoryPort
     ) {
         return new RefreshTokenUseCase(
                 tokenGeneratorPort,

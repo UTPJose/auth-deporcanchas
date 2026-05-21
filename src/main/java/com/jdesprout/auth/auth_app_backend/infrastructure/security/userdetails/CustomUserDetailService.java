@@ -15,7 +15,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     private final UserRepositoryPort userRepository;
 
-    public CustomUserDetailService(@Qualifier("SecondRepository") UserRepositoryPort userRepository) {
+    public CustomUserDetailService(UserRepositoryPort userRepository) {
         this.userRepository = userRepository;
     }
 

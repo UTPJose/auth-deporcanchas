@@ -13,7 +13,7 @@ public class UserUseCaseConfig {
 
     @Bean
     public CreateUserUseCase createUserUseCase(
-            @Qualifier("SecondRepository") UserRepositoryPort userRepository,
+            UserRepositoryPort userRepository,
             RoleRepositoryPort roleRepository
     ) {
         return new CreateUserUseCase(
@@ -24,7 +24,7 @@ public class UserUseCaseConfig {
 
     @Bean
     public DeleteUserUseCase deleteUserUseCase(
-            @Qualifier("SecondRepository") UserRepositoryPort userRepository
+            UserRepositoryPort userRepository
     ) {
         return new DeleteUserUseCase(
                 userRepository
@@ -33,7 +33,7 @@ public class UserUseCaseConfig {
 
     @Bean
     public GetAllUserByRoleUseCase getAllUserByRoleUseCase(
-            @Qualifier("SecondRepository") UserRepositoryPort userRepository
+            UserRepositoryPort userRepository
     ) {
         return new GetAllUserByRoleUseCase(
                 userRepository
@@ -42,7 +42,7 @@ public class UserUseCaseConfig {
 
     @Bean
     public GetAllUserUseCase getAllUserUseCase(
-            @Qualifier("SecondRepository") UserRepositoryPort userRepository
+            UserRepositoryPort userRepository
     ) {
         return new GetAllUserUseCase(
                 userRepository
@@ -51,7 +51,7 @@ public class UserUseCaseConfig {
 
     @Bean
     public GetUserByEmailUseCase getUserByEmailUseCase(
-            @Qualifier("SecondRepository") UserRepositoryPort userRepository
+            UserRepositoryPort userRepository
     ) {
         return new GetUserByEmailUseCase(
                 userRepository
@@ -60,7 +60,7 @@ public class UserUseCaseConfig {
 
     @Bean
     public GetUserByIdUseCase getUserByIdUseCase(
-            @Qualifier("SecondRepository") UserRepositoryPort userRepository
+            UserRepositoryPort userRepository
     ) {
         return new GetUserByIdUseCase(
                 userRepository
@@ -69,7 +69,7 @@ public class UserUseCaseConfig {
 
     @Bean
     public UpdateUserUseCase updateUserUseCase(
-            @Qualifier("SecondRepository") UserRepositoryPort userRepository,
+            UserRepositoryPort userRepository,
             PasswordEncoderPort passwordEncoderPort
     ) {
         return new UpdateUserUseCase(

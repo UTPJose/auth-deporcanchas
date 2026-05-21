@@ -23,8 +23,10 @@ public class UserJpaEntity {
     private String email;
     @Column(name = "nombre", length = 500, nullable = false)
     private String name;
-    @Column(name = "clave", nullable = false, length = 100)
+    @Column(name = "clave_hash", nullable = false, length = 100)
     private String password;
+    @Column(name= "dni", unique = true)
+    private String dni;
     @Column(name = "celular", unique = true)
     private String phoneNumber;
     @Builder.Default
